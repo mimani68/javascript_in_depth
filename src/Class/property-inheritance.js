@@ -9,5 +9,9 @@ function App(name) {
     console.log('start app ' + name);
 }
 
+App.prototype.showNotification = function() {
+    console.log('Hello New User');
+}
 
-new App('AntiVirus');
+var app = new App('AntiVirus');
+app.showNotification();

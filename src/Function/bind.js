@@ -21,6 +21,7 @@ var versionLogic = {
         console.log(JSON.stringify(this));
     },
 };
+
 var portLogic = {
     port: '3000',
     setPort: function(params) {
@@ -36,8 +37,5 @@ var appFn = App.bind(Object.assign(versionLogic, portLogic));
 appFn('Sophose').showAll();
 appFn('Sophose').setVersion('1.0.2').showAll();
 appFn('Sophose').setPort('3010').showAll();
-
-var { port: newPort } = Object.assign(versionLogic, portLogic);
-console.log(newPort);
 
 console.log('finsih application');
