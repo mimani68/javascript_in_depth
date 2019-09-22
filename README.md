@@ -3,12 +3,12 @@
 
 ## Property Inheritance
 
-    node ./src/
+    node ./src/Class/class.js
 
 
-## Class
+## Chain in Property Inheritance
 
-    $ node ./src/Class/class.js
+    $ node ./src/Class/chain-resp.js
 
 ## Function
 
