@@ -6,4 +6,10 @@
     node ./src/
 
 
-## Inject class into project
+## Class
+
+    $ node ./src/Class/class.js
+
+## Function
+
+    $ node ./src/Function/bind.js
