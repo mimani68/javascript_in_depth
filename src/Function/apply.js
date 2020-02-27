@@ -28,9 +28,6 @@ var portLogic = {
     }
 };
 
-var appFn = App.bind(Object.assign(versionLogic, portLogic));
-appFn('Sophose').showAll();
-appFn('Sophose').setVersion('1.0.2').showAll();
-appFn('Sophose').setPort('3010').showAll();
+App.apply(Object.assign(versionLogic, portLogic)).setVersion('1.0.2').showAll()
 
 console.log('finsih application');

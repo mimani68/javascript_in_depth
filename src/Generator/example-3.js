@@ -1,34 +1,50 @@
-function* salam() {
-	yield 'one';
-	yield 'two';
-	yield 'three';
+/**
+ *
+ *   ____                           _
+ *  / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __
+ * | |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|
+ * | |_| |  __/ | | |  __/ | | (_| | || (_) | |
+ *  \____|\___|_| |_|\___|_|  \__,_|\__\___/|_|
+ *
+ */
+
+
+/**
+ *
+ * create `chain pattern`
+ *
+ */
+function appWrapper() {
+	return this
 }
 
-function coreSalamTwo(value) {
-	return new Promise((res, rej) => {
-		setTimeout(_ => res(value), 1000)
-	});
+function* sampleGenerator() {
+	for( let i = 0 ; i < 5 ; i++ ) {
+		yield i
+	}
 }
 
-function getFromServer(value) {
-	return coreSalamTwo(value);
+/**
+ *
+ * use loop on generator
+ *
+ */
+function forEach() {
+	for ( let value of this.sampleGenerator() ) {
+		console.log(value)
+	}
 }
 
-( async () => {
-	console.log('1');
-	console.log(await getFromServer('firstApp'));
-	console.log('2');
-	getFromServer('secondApp').then(o => console.log('salam %s', o))
-	console.log('3');
-	// console.log(salam().next()); // => {"value":"one": "done":false}
-	// salamTwoInterface()
-	// 	.then(o => console.log(o)) // => {}
-	// 	.catch(o => console.error(o)); // => {}
+/*
+ *
+ * Inject `forEach` and `sampleGenerator` into `appWrapper`
+ *
+ * const object = {
+ * 	 sampleGenerator: () => { ... },
+ * 	 forEach: () => { ... }
+ * }
+ *
+ */
+let temp = appWrapper.bind(Object.assign({forEach, sampleGenerator}), null)
+temp().forEach()
 
-	// setTimeout(_ => {
-	// 	salamTwoInterface()
-	// 		.then(o => console.log(o)) // => {}
-	// 		.catch(o => console.error(o)); // => {}
-	// }, 1000)
-
-})();

@@ -1,20 +1,23 @@
+/**
+ *      _                          ____                           _
+ *     / \   ___ _   _ _ __   ___ / ___| ___ _ __   ___ _ __ __ _| |_ ___  _ __
+ *    / _ \ / __| | | | '_ \ / __| |  _ / _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|
+ *   / ___ \\__ \ |_| | | | | (__| |_| |  __/ | | |  __/ | | (_| | || (_) | |
+ *  /_/   \_\___/\__, |_| |_|\___|\____|\___|_| |_|\___|_|  \__,_|\__\___/|_|
+ *               |___/
+ *
+ */
 
-function main() {
-	return this
-}
-
-function* sampleGenerator() {
+async function* sampleGenerator() {
 	for( let i = 0 ; i < 5 ; i++ ) {
 		yield i
 	}
 }
 
-function forEach() {
-	for ( let value of this.sampleGenerator() ) {
-		console.log(value)
+let run = async () => {
+	for await ( let value of sampleGenerator() ) {
+		console.log( value )
 	}
 }
 
-let e = main.bind(Object.assign({forEach, sampleGenerator}), null)
-e().forEach()
-
+run()
