@@ -1,7 +1,8 @@
 
-function ErrorWrapper(message = "error occured") {
+function ErrorWrapper(message = "error occured", localStatusCode) {
 	this.title = 'logicalError'
 	this.message = `[${ this.title }] ${ message }`
+	this.code = localStatusCode || 0
 	this.isLogical = true
 	this.stack = new Error().stack
 	this.sendToCentralErrorLogServer()
@@ -15,9 +16,9 @@ ErrorWrapper.prototype.sendToCentralErrorLogServer = function () {
 
 function sampleController(params) {
 	if (params === 'name')
-		return new ErrorWrapper('name is empty')
+		return new ErrorWrapper('name is empty', 1)
 	if (params === 'family')
-		return new ErrorWrapper('family is empty')
+		return new ErrorWrapper('family is empty', 2)
 	return {
 		title: 'Halo'
 	}
@@ -25,6 +26,10 @@ function sampleController(params) {
 
 function application() {
 	let e = sampleController('family')
+	if ( e instanceof ErrorWrapper && e.code === 2 ) {
+		console.error('Incomplete user data')
+		return
+	}
 	if (e instanceof ErrorWrapper) {
 		console.error(e.message)
 		return
